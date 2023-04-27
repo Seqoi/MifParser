@@ -2,6 +2,9 @@ package com.company;
 import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.json.JSONObject;
+import org.json.simple.JSONObject;
+
 
 
 
@@ -19,7 +22,7 @@ public class Main {
         final int READ_KEY = 1;
         final int READ_VALUE = 2;
         int state = LOOKUP;
-        Gson g = new Gson();
+       // Gson g = new Gson();
         try(FileInputStream fin=new FileInputStream(path))
             {
                 System.out.println("DEBUG 1");
@@ -27,7 +30,8 @@ public class Main {
                 while((i=fin.read()) != -1){
                     switch (state) {
                         case LOOKUP:
-                            if ((i > 'A') && (i < 'z')) {
+                            //isDigit(String.valueOf(i));
+                            if (((i > 'A') && (i < 'z')) || ((isDigit(String.valueOf(i)) == true)))  {
                                 state = READ_KEY;
                                 System.out.print("{\"");
                                 System.out.print((char) i);
@@ -35,7 +39,8 @@ public class Main {
                             break;
 
                         case READ_KEY:
-                            if ((i > 'A') && (i < 'z')) {
+                           // isDigit(String.valueOf(i));
+                            if (((i > 'A') && (i < 'z')) || ((isDigit(String.valueOf(i)) == true))) {
                                 System.out.print((char) i);
                             } else {
                                 System.out.print("\", \"");
@@ -59,7 +64,15 @@ public class Main {
 
                 System.out.println(ex);
                 System.out.println(ex.getMessage());
-            }
         }
+    }
+    private static boolean isDigit(String i) throws NumberFormatException {
+        try {
+            Double.parseDouble(i);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
+    }
+}
 
