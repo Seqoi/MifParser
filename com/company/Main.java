@@ -27,9 +27,9 @@ public class Main {
         final int READ_VALUE = 2;
         int state = LOOKUP;
        // Gson g = new Gson();
-        try(FileInputStream fin=new FileInputStream(pathWindows))
+        try(FileInputStream fin=new FileInputStream(pathMacOS))
             {
-                System.out.println("Parsing of"+pathWindows);
+                System.out.println("Parsing of"+pathMacOS);
                 System.out.println("\"test1\" : {");
                 int i;
                 while((i=fin.read()) != -1){
